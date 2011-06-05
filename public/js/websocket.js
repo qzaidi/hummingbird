@@ -28,12 +28,16 @@ Hummingbird.WebSocket.prototype = {
 
   onMessage: function(message) {
     message = JSON.parse(message);
-    var i = this.handlers[message.type].length;
-    while(i--) {
-      var handler = this.handlers[message.type][i][0];
-      var scope = this.handlers[message.type][i][1];
+    try {
+      var i = this.handlers[message.type].length;
+      while(i--) {
+        var handler = this.handlers[message.type][i][0];
+        var scope = this.handlers[message.type][i][1];
 
-      handler.apply(scope, [message.data]);
+        handler.apply(scope, [message.data]);
+      }
+    } catch(e) { 
+      // console.log("Error processing " + message.type);
     }
   },
 
@@ -48,7 +52,8 @@ Hummingbird.WebSocket.prototype = {
 
   start: function() {
     // Functions that extract data and update UI elements
-    this.handlers = [];
+    if (this.handlers == undefined)
+       this.handlers = [];
 
     this.socket = new io.Socket(this.webSocketURI(), {port: this.webSocketPort()});
     this.socket.connect();

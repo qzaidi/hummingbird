@@ -15,7 +15,7 @@ Hummingbird.Base.prototype = {
   },
 
   registerHandler: function() {
-    this.socket.registerHandler(this.onData, this, this.from);
+    this.socket.registerHandler(this.onData, this, this.options.from);
   },
 
   onMessage: function(message) {
