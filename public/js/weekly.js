@@ -1,11 +1,11 @@
-if(!Hummingbird) { Hummingbird = {}; }
+if(!Hummingbird) { var Hummingbird = {}; }
 
 Hummingbird.Weekly = {};
 
 Hummingbird.Weekly.weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 Hummingbird.Weekly.init = function() {
-    var weekJson = "/week.json";
+    var weekJson = '//' + document.location.hostname + ':8000/week.json?callback=?';
     if(document.location.search.match(/use_prod/)) {
       weekJson += "?use_prod";
     }
@@ -29,6 +29,9 @@ Hummingbird.Weekly.init = function() {
         if(this.total) {
           dateDiv.find('div.all_views').text(this.total.commify()).data('total', this.total);
         }
+	if (this.cartAdds) {
+	  dateDiv.find('div.cart_adds').text(this.cartAdds.commify()).data('cart_adds',this.cartAdds);
+	}
 
         dateDiv.appendTo('#days');
       });
