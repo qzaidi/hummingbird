@@ -2,7 +2,6 @@ require.paths.unshift(__dirname + '/lib');
 require.paths.unshift(__dirname);
 
 var http = require('http'),
-  weekly = require('weekly'),
   fs = require('fs'),
   dgram = require('dgram'),
   static = require('node-static'),
@@ -77,3 +76,5 @@ if(config.enable_dashboard) {
 
   console.log('Dashboard server running at http://*:' + config.dashboard_port);
 }
+
+require('monitor');

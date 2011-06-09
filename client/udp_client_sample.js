@@ -1,4 +1,5 @@
-var dgram = require('dgram');
+var dgram = require('dgram'),
+    sys = require('sys');
 
 function sendMessage(data) {
   var message = new Buffer(JSON.stringify(data));
@@ -7,12 +8,17 @@ function sendMessage(data) {
   client.close();
 }
 
-var msg = {
-  "ip" : "129.59.1.10",
-  "timestamp" : "Sat Oct 23 2010 21:39:35 GMT-0400 (EDT)",
-  "url_key" : 123,
-  "product_id" : 456
-};
+setInterval(function() {
+  var ip = Math.round(Math.random()*255);
+  for (var j = 0; j < 3; j++)
+    ip += '.' + Math.round(Math.random()*255);
 
-sendMessage(msg);
-
+  sys.puts(ip);
+   var msg = {
+    "ip" : ip,
+    "timestamp" : new Date(),
+    "url_key" : 123,
+    "product_id" : 456
+   };
+  sendMessage(msg);
+},1000);

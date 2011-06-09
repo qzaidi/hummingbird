@@ -5,7 +5,7 @@ Hummingbird.Weekly = {};
 Hummingbird.Weekly.weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 Hummingbird.Weekly.init = function() {
-    var weekJson = '//' + document.location.hostname + ':8000/week.json?callback=?';
+    var weekJson = '//' + document.location.hostname + ':8888/json/day?callback=?';
     if(document.location.search.match(/use_prod/)) {
       weekJson += "?use_prod";
     }
