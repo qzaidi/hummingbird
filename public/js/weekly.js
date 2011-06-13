@@ -5,7 +5,7 @@ Hummingbird.Weekly = {};
 Hummingbird.Weekly.weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 Hummingbird.Weekly.init = function() {
-    var weekJson = '//' + document.location.hostname + ':8888/json/day?callback=?';
+    var weekJson = '//' + siteconfig.report + '/json/day?callback=?';
     if(document.location.search.match(/use_prod/)) {
       weekJson += "?use_prod";
     }
@@ -33,6 +33,7 @@ Hummingbird.Weekly.init = function() {
 	  dateDiv.find('div.cart_adds').text(this.cartAdds.commify()).data('cart_adds',this.cartAdds);
 	}
 
+	$('#date_' + day.getTime()).remove();
         dateDiv.appendTo('#days');
       });
     });

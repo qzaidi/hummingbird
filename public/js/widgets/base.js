@@ -26,15 +26,16 @@ Hummingbird.Base.prototype = {
     var average;
     var message = this.extract(fullData);
 
-    if(typeof(message) != "undefined") {
+    if(typeof(message) != "undefined")
       this.validMessageCount += 1;
+    else
+      message = 0;
 
-      // Calculate the average over N seconds if the averageOver option is set
-      if(this.options.averageOver) { average = this.addToAverage(message); }
+    // Calculate the average over N seconds if the averageOver option is set
+    if(this.options.averageOver) { average = this.addToAverage(message); }
 
-      if((!this.options.every) || (this.validMessageCount % this.options.every == 0)) {
-        this.onMessage(message, this.average());
-      }
+    if((!this.options.every) || (this.validMessageCount % this.options.every == 0)) {
+       this.onMessage(message, this.average());
     }
   },
 

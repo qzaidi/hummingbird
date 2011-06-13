@@ -12,7 +12,7 @@ app.configure(function(){
 app.get('/json/:id', function(req,res) {
   var datacallback = weekly.findBy[req.params.id];
   datacallback(app.settings['db'], function(data) {
-    res.contentType('json');
+    res.contentType('javascript');
     if (req.query.callback)
        data = req.query.callback + '(' + data + ');';
     res.send(data);

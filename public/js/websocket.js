@@ -78,6 +78,8 @@ Hummingbird.WebSocket.prototype = {
       var wsServerParam = document.location.search.match(/ws_server=([^\&\#]+)/) || [];
       var wsPortParam = document.location.search.match(/ws_port=([^\&\#]+)/) || [];
       var wsServer = wsServerParam[1];
+    } else if(siteconfig && siteconfig.ws) {
+      var wsServer = siteconfig.ws.split(':')[0]; 
     } else {
       var wsServer = document.location.hostname;
     }
@@ -104,6 +106,8 @@ Hummingbird.WebSocket.prototype = {
     if(document.location.search.match(/ws_server/)) {
       var wsPortParam = document.location.search.match(/ws_port=([^\&\#]+)/) || [];
       return wsPortParam;
+    } else if (siteconfig && siteconfig.ws) {
+      return siteconfig.ws.split(':')[1]; 
     }
     return 8000;
   }
