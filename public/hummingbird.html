@@ -96,9 +96,10 @@
       new Hummingbird.Logger(window,
                              hummingbirdSocket,
                              {
-                               from: "view_totals",
-                               filter: "cartAdds",
-                               every: 20
+                               from: "browser",
+			       filter: "views",
+                               every: 20,
+			       debug: 1
                              });
 
       $("#test_it").click(function(e) {
