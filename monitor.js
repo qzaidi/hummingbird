@@ -12,11 +12,13 @@ app.configure(function(){
 app.get('/json/:id', function(req,res) {
   var datacallback = weekly.findBy[req.params.id];
   datacallback(app.settings['db'], function(data) {
-    res.contentType('javascript');
+    res.header("Content-Type", "text/javascript");
     if (req.query.callback)
        data = req.query.callback + '(' + data + ');';
     res.send(data);
   });
 });
+
+setInterval(weekly.summarize,1000*3600,app.settings['db']);
 
 app.listen(8888);
