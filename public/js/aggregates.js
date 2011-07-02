@@ -20,7 +20,8 @@ $(function () {
 
    function getMetricData(metric,divElem,startTime,endTime)
     {
-      $.getJSON(baseURL +  metric + "?callback=?" , function(data) {
+      var url = baseURL +  metric ;
+      $.getJSON(url + "?callback=?", function(data) {
          console.log("fetched for metric " + metric + " in " + divElem);
 	 var d1 = data.map(function(d,index,array) {
 		     return [ d[metric], d.total || 0];
@@ -31,8 +32,8 @@ $(function () {
 	     };
 	 $.plot($(divElem),[ { 'label':'Impressions Last Day', 'data': d1 } ],  options);
 
-	 $(divElem).append( '<div align="right"><img src="images/csv.png" width=16 height=16/>'
-			 +'<img src="images/js.png" width=16 height=16/></div>');
+	 $(divElem).append( '<div align="right"><a href="#"><img src="images/csv.png" width=16 height=16/><a>'
+			 +'<a href="' + url + '"><img src="images/js.png" width=16 height=16/></a></div>');
          });
     }
 
