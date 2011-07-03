@@ -32,7 +32,7 @@ db.open(function(p_db) {
 
     socket.on('connection', function(client){
       // new client is here!
-      client.on('disconnect', function(){ console.log("Lost ws client"); })
+      client.on('disconnect', function(){ console.log("Lost ws client"); });
     });
 
     hummingbird.socket = socket;

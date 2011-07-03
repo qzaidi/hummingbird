@@ -19,6 +19,4 @@ app.get('/json/:id', function(req,res) {
   });
 });
 
-setInterval(weekly.summarize,1000*3600,app.settings['db']);
-
 app.listen(8888);
