@@ -2,12 +2,12 @@ module.exports = config = {
     "name" : "Hummingbird",
 
     "tracking_port" : 8000,
-    "dashboard_port" : 8080,
+    "dashboard_port" : 8050,
 
     "mongo_host" : "localhost",
     "mongo_port" : 27017,
 
-    "udp_address" : "127.0.0.1",
+    "udp_address" : "0.0.0.0",
     "udp_port" : 8000,
 
     "enable_dashboard" : true,
