@@ -14,14 +14,16 @@ div.day div.date_title {
   font-size: 2.5em;
 }
 
-div.day div.all_views_container,
+div.day div.all_views_container ,
+div.day div.all_uniques_container ,
 div.day div.cart_adds_container {
   float: right;
-  clear: right;
   text-align: right;
+  margin: 20px;
 }
 
 div.day div.all_views,
+div.day div.all_uniques,
 div.day div.cart_adds {
   font-size: 2.5em;
   font-weight: bold;
@@ -32,6 +34,7 @@ div.day div.all_views {
   color: #5BC4B6;
 }
 
+div.day div.all_uniques_container p,
 div.day div.all_views_container p,
 div.day div.cart_adds_container p {
   margin: 0 0 1em 0;
