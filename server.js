@@ -5,7 +5,6 @@ var http = require('http'),
     config = require('./config/config'),
     fs = require('fs'),
     dgram = require('dgram'),
-    static = require('node-static'),
     io = require('socket.io'),
     mongo = require('mongodb'),
     Hummingbird = require('hummingbird').Hummingbird;
@@ -59,16 +58,7 @@ db.open(function(p_db) {
   console.log('Tracking server running at http://*:' + config.tracking_port + '/tracking_pixel.gif');
 });
 
-if(config.enable_dashboard) {
-  var file = new(static.Server)('./public');
-
-  http.createServer(function (request, response) {
-    request.addListener('end', function () {
-      file.serve(request, response);
-    });
-  }).listen(config.dashboard_port);
-
-  console.log('Dashboard server running at http://*:' + config.dashboard_port);
+if (config.enable_dashboard) {
+   console.log('Dashboard server running at http://*:' + config.dashboard_port);
+   require('monitor');
 }
-
-require('monitor');
