@@ -32,6 +32,10 @@ Hummingbird.Weekly.init = function() {
 	if (this.cartAdds) {
 	  dateDiv.find('div.cart_adds').text(this.cartAdds.commify()).data('cart_adds',this.cartAdds);
 	}
+	if (this.uniques) {
+	  dateDiv.find('div.all_uniques').text(this.uniques.commify()).data('uniques',this.uniques);
+	}
+
 
 	$('#date_' + day.getTime()).remove();
         dateDiv.appendTo('#days');
