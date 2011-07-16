@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html>
+
+<head>
+<script type="text/javascript">
+var siteconfig = {
+		"track": "//localhost:8000",
+		"ws":	 "//localhost:8000",
+		"report":"//localhost:8050"
+                 };
+WEB_SOCKET_SWF_LOCATION = siteconfig.track + '/socket.io/WebSocketMain.swf';
+</script>
+  <script src="js/config.js" type="text/javascript"></script>
+  <script src="js/jquery-1.5.1.min.js"></script>
+  <script type="text/javascript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
+
+  <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot/excanvas.min.js"></script><![endif]-->
+  <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
+  <script language="javascript" type="text/javascript" src="js/aggregates.js"></script>
+
+  <script src="http://localhost:8000/socket.io/socket.io.js"></script>
+
+  <script src="js/helpers.js"></script>
+
+  <script src="js/websocket.js"></script>
+  <script src="js/polymaps.js"></script>
+  <script src="js/weekly.js"></script>
+
+  <script src="js/widgets/base.js"></script>
+  <script src="js/widgets/logger.js"></script>
+  <script src="js/widgets/graph.js"></script>
+  <script src="js/widgets/count.js"></script>
+  <script src="js/widgets/map.js"></script>
+
+  <title>HummingBird</title>
+
+  <link rel="shortcut icon" type="image/png" href="images/favicon.png" />
+
+  <link type="text/css" href="css/ui-lightness/jquery-ui-1.8.13.custom.css" rel="stylesheet" />   
+  <link rel="stylesheet" media="all" href="css/main.css" />
+  <link rel="stylesheet" media="all" href="css/map.css" />
+  <link rel="stylesheet" media="all" href="css/weekly.css" />
+  <link rel="stylesheet" media="all" href="css/header.css" />
+</head>
+
+<body>
+ <div id="topBar" >
+    <div id="wv_campaignDetails">
+      <div id="demoInfo">
+        <h2>HummingBird</h2>
+        <p>Real-time statistics for advertisers. <a class="learnMore" href="#">Learn more...</a></p>
+      </div>
+    </div>
+    <ul id="wv_fsCounter">
+      <li id="opens">
+        <span class="countAmount" id="topBarOpenCount">0</span>
+        <span class="key" id="openCountKey">Views</span>
+      </li>
+      <li id="clicks">
+        <span class="countAmount" id="topBarClickCount">0</span>
+        <span class="key" id="clickCountKey">Clicks</span>
+      </li>
+      <li id="shares">
+        <span class="countAmount" id="topBarShareCount">0</span>
+        <span class="key" id="shareCountKey">Leads</span>
+      </li>
+    </ul>
+</div>
+  <div id="tabs">
+  <ul>
+    <li><a href="#tabs-dash"> Dashboard</a> </li>
+    <li><a href="#tabs-time"> Time Series</a> </li>
+    <li><a href="#tabs-map"> Map View </a></li>
+    <li><a href="#tabs-aggr">Aggregates</a></li>
+  </ul>
+  <div id="tabs-map">
+  <div id="map_container" style="margin: 40px; width: 800px; height: 450px; position: relative;"></div>
+  </div>
+
+  <div id="tabs-aggr">
+
+  <h1> Last Hour </h1>
+  <div id="hour" style="width:800px;height:300px;"></div>
+
+  <h1> Last Day </h1>
+  <div id="day" style="width:800px;height:300px;"></div>
+
+  <h1> Last Week </h1>
+  <div id="week" style="width:800px;height:300px;"></div>
+
+  </div>
+
+  <div id="tabs-dash">
+	  <div id="days"></div>
+
+	  <div id="day_template" class="day">
+
+	    <div class="all_uniques_container">
+	      <div class="all_uniques">0</div>
+	      <p>Uniques</p>
+	    </div>
+
+	    <div class="cart_adds_container">
+	      <div class="cart_adds">0</div>
+	      <p>Cart Adds</p>
+	    </div>
+
+	    <div class="all_views_container">
+	      <div class="all_views">0</div>
+	      <p>Page views</p>
+
+	    </div>
+
+	    <div class="date_title"></div>
+
+	    <div style="clear: both;"></div>
+	  </div>
+
+	  <div id="sale_template" class="day_sale">
+	    <div class="sale_views"></div>
+	    <div class="sale_title"></div>
+	  </div>
+</div>
+  <div id="tabs-time"> 
+  <div class="hummingbird_graph" id="total">
+
+    <h2 class="graph_title">All Traffic: <span class="value">0</span> Pageviews / Second</h2>
+
+    <div class="axis_left"></div>
+    <div class="graph"></div>
+    <div class="axis_right"></div>
+
+  </div>
+
+  <div style="clear: both;"></div>
+
+  <div class="hummingbird_graph" id="cart_adds">
+
+    <h2 class="graph_title">Cart Traffic:</h2>
+
+    <div class="axis_left"></div>
+    <div class="graph"></div>
+    <div class="axis_right"></div>
+
+  </div>
+
+  <div style="clear: both;"></div>
+
+  <div class="hummingbird_graph" id="sales">
+
+    <h2 class="graph_title">Sales:</h2>
+
+    <div class="axis_left"></div>
+    <div class="graph"></div>
+    <div class="axis_right"></div>
+
+  </div>
+
+  <div style="clear: both;"></div>
+
+  </div>
+
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $('#tabs').tabs();
+      hummingbirdSocket = new Hummingbird.WebSocket();
+      hummingbirdSocket.start();
+
+      Hummingbird.Weekly.init(); 
+      $("#total").hummingbirdGraph(hummingbirdSocket,
+                                 {
+                                   from: "view_totals",
+                                   filter: "total"
+                                 });
+
+      $("#cart_adds").hummingbirdGraph(hummingbirdSocket,
+                                       {
+                                         from: "view_totals",
+                                         filter: "cartAdds",
+                                         graphHeight: 115
+                                       });
+      $("#sales").hummingbirdGraph(hummingbirdSocket,
+                                       {
+                                         from: "Sales",
+                                         filter: { 'sales' : 'product'},
+                                         graphHeight: 80
+                                       });
+
+      $("#total h2.graph_title span.value").hummingbirdCount(hummingbirdSocket,
+                                                             {
+                                                               from: "view_totals",
+                                                               filter: "total",
+                                                               every: 10
+                                                             });
+
+      new Hummingbird.Logger(window,
+                             hummingbirdSocket,
+                             {
+                               from: "view_totals",
+                               filter: "cartAdds",
+                               every: 20
+                             });
+
+	$("#tabs").bind('tabsshow', function(event,ui) {
+	   switch(ui.panel.id) {
+	    case "tabs-map":
+	      if (!Hummingbird.maps)
+		 Hummingbird.maps = $("#map_container").hummingbirdMap(hummingbirdSocket, { from: "Location", filter: "location" });
+	      break;
+	    case "tabs-aggr":
+	      break;
+	    case "tabs-dash":
+	      Hummingbird.Weekly.init();
+	      break;
+	   }
+	});
+
+    });
+  </script>
+
+  
+
+</body>
+</html>

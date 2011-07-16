@@ -1,0 +1,187 @@
+/* ----- GLOBAL & BODY ----- */
+
+html{height: 100%;}
+/*
+*{margin:0; padding:0}
+body{height: 100%;color:#333; font:normal 12px arial,sans-serif;min-width: 1000px;}
+*/
+
+#topBar {
+  margin:0; padding: 0;
+  font: normal 12px arial, sans-serif;
+  background-color: #eaeaec;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafafa), to(#eaeaec));
+  background-image: -moz-linear-gradient(0% 100% 90deg,#eaeaec, #fafafa);
+  width: 100%;
+  height: 70px;
+  text-align: left;
+  -webkit-box-shadow:
+    inset 0 -1px 0 0 rgba(0,0,0,0.08),
+    inset 0 1px 0 0 #fff,
+    0 2px 5px 0 rgba(0,0,0,0.25);
+  -moz-box-shadow:
+    inset 0 -1px 0 0 rgba(0,0,0,0.08),
+    inset 0 1px 0 0 #fff,
+    0 2px 5px 0 rgba(0,0,0,0.25);
+  z-index: 99999;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+/*	--------------------------------------------------
+	CAMPAIGN DETAILS
+	-------------------------------------------------- */
+
+#wv_campaignDetails {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 10px;
+  left: 0;
+  top: 0;
+}
+
+#wv_campaignDetails h2 {
+    margin: 0;
+    font-size: 18px;
+    color: #444;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-font-smoothing: antialiased;
+}
+  
+
+/*	--------------------------------------------------
+	WORLDVIEW COUNTER
+	-------------------------------------------------- */
+
+ul#wv_fsCounter, ul#counts {
+  position: absolute;
+  right: 0;
+  top: 8px;
+  margin-right: 20px;
+  background-color: #f1f1f1;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f1f1f1), to(#eaeaec));
+  background-image: -moz-linear-gradient(0% 100% 90deg,#eaeaec, #f1f1f1);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow:
+    inset 0 1px 5px 0 rgba(0,0,0,0.2),
+    inset 0 0 0 1px rgba(0,0,0,0.06),
+    0 1px 0 0 #fff;
+  -moz-box-shadow:
+    inset 0 1px 5px 0 rgba(0,0,0,0.2),
+    inset 0 0 0 1px rgba(0,0,0,0.06),
+    0 1px 0 0 #fff;
+  height: 46px;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul#wv_fsCounter, ul#counts {
+  border: 1px solid #ddd !IE;
+  top: 6px !IE;
+}
+
+ul#counts {
+  top: 10px !important;
+  right: 10px !important;
+  border: 2px solid rgba(0,0,0,0.45) !important;
+  background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fafafa), to(#e8e8eb));
+  background-image: -moz-linear-gradient(0% 100% 90deg,#e8e8eb, #fafafa);
+  -webkit-box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.06),
+    0 1px 0 0 rgba(255,255,255,0.3);
+  -moz-box-shadow:
+  inset 0 0 0 1px rgba(255,255,255,0.06),
+  0 1px 0 0 rgba(255,255,255,0.3);
+  height: 40px;
+  display: none;
+  margin-right: 0 !important;
+}
+
+  ul#wv_fsCounter li, ul#counts li {
+    padding: 0 12px;
+    margin: 0;
+    display: inline-block;
+    line-height: 1;
+    height: 46px;
+  }
+  
+  ul#counts li {
+    height: 40px;
+  }
+  
+  ul#wv_fsCounter li, ul#counts li {
+    display: inline !IE;
+  }
+  
+  ul#wv_fsCounter li#opens, ul#counts li#opens {
+    border-right: 1px solid rgba(255,255,255,0.5);
+    -webkit-box-shadow: inset -1px 0 0 0 #dcdcdc;
+    -moz-box-shadow: inset -1px 0 0 0 #dcdcdc;
+  }
+  
+    ul#wv_fsCounter li#opens span.key, ul#counts li#opens span.key {
+      padding-right: 10px;
+      background: url('../images/views.png') no-repeat right center;
+    }
+  
+  ul#wv_fsCounter li#clicks, ul#counts li#clicks {
+    border-right: 1px solid rgba(255,255,255,0.5);
+    -webkit-box-shadow: inset -1px 0 0 0 #dcdcdc;
+    -moz-box-shadow: inset -1px 0 0 0 #dcdcdc;
+    padding-left: 9px;
+   }
+   
+    ul#wv_fsCounter li#clicks span.key, ul#counts li#clicks span.key {
+     padding-right: 10px;
+     background: url('../images/clicks.png') no-repeat right center;
+    }
+  
+  ul#wv_fsCounter li#shares, ul#counts li#shares {
+    padding-left: 9px;
+  }
+    
+    ul#wv_fsCounter li#shares span.key, ul#counts li#shares span.key {
+     padding-right: 10px;
+     background: url('../images/leads.png') no-repeat right center;
+    }
+  
+  ul#wv_fsCounter span.countAmount, ul#counts span.countAmount {
+    display: block;
+    font-weight: bold;
+    font-size: 21px;
+    margin-top: 7px;
+  }
+  
+  ul#counts span.countAmount {
+    font-size: 18px;
+    margin-top: 6px;
+  }
+  
+  span.key {
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+  }
+
+#demoInfo {
+  -webkit-font-smoothing: antialiased;
+}
+#demoInfo h2 {
+  color: #444;
+  display: block;
+  font-size: 21px;
+}
+#demoInfo p {
+  color: #888;
+  display: block;
+  line-height: 18px;
+}
+#demoInfo p a {
+  color: #2682de;
+  font-weight: bold;
+  text-decoration: none;
+}
