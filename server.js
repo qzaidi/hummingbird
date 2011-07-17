@@ -45,8 +45,11 @@ db.open(function(p_db) {
       udpServer.on("message", function(message, rinfo) {
         console.log("message from " + rinfo.address + " : " + rinfo.port);
 
-        var data = JSON.parse(message);
-        hummingbird.insertData(data);
+	try {
+	  var data = JSON.parse(message);
+	  hummingbird.insertData(data);
+	} catch(e) {
+	}
       });
 
       udpServer.bind(config.udp_port, config.udp_address);
