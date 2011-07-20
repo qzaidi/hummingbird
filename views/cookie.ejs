@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title> Cookie Status</title>
+    <link rel='stylesheet' href="/css/cookie.css">
+  </head>
+  <body>
+    <h3> Cookie Status </h3>
+    <table id='htable'>
+      <thead>
+        <tr>
+          <th scope='col'>Segment Pixel</th><th scope='col'>Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (var i=0; i < cookie.segments.length; i++) { %>
+        <tr>
+            <td> <%= escape(cookie.segments[i]) %> </td> 
+            <td> <%= new Date() %> </td> 
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+   <table id='htable'>
+   <thead>
+     <tr>
+       <th scope='col'>Cookie Field</th><th>Value</th>
+   </thead>
+   <tbody>
+         <% for (k in cookie) { %>
+        <tr>
+	<% if (typeof k == "string") { %>
+          <td><%= k %> </td> 
+          <td><%= cookie[k] %></td> 
+	<% } %>
+        </tr>
+	<% } %>
+   </tbody>
+   </table>
+  </body>
+</html>

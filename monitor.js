@@ -1,7 +1,8 @@
 var sys = require('sys'),
     express = require('express'),
     weekly = require('weekly'),
-    users = require('users');
+    users = require('users'),
+    Cookie = require('cookie').Cookie;
 
 var app = express.createServer();
 
@@ -43,7 +44,9 @@ app.get('/json/:id', function(req,res) {
 });
 
 app.get('/cookie/', function(req,res) {
-  res.render('cookie',{ cookie: req.cookie });
+  // extract and process tuid cookie into a cookie object
+  var cookie = new Cookie(req.headers.cookie,null);
+  res.render('cookie',{ cookie: { uid:cookie.uid, segments:cookie.segments, firstSeen: new Date(cookie.basetime) } });
 });
 
 app.post('/login', function(req,res) {

@@ -11,6 +11,7 @@ module.exports = config = {
     "udp_port" : 8000,
 
     "enable_dashboard" : true,
+    "enable_tracker"   : true,
 
     "capistrano" : {
         "repository" :       "git://github.com/qzaidi/hummingbird.git",

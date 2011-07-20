@@ -16,8 +16,9 @@ db.addListener("error", function(error) {
 });
 
 db.open(function(p_db) {
-  var hummingbird = new Hummingbird();
-  hummingbird.init(db, function() {
+  if (config.enable_tracker) {
+    var hummingbird = new Hummingbird();
+    hummingbird.init(db, function() {
     var server = http.createServer(function(req, res) {
       try {
         hummingbird.serveRequest(req, res);
@@ -25,8 +26,8 @@ db.open(function(p_db) {
         hummingbird.handleError(req, res, e);
       }
     });
-    server.listen(config.tracking_port, "0.0.0.0");
 
+    server.listen(config.tracking_port, "0.0.0.0");
     socket = io.listen(server);
 
     socket.on('connection', function(client){
@@ -50,15 +51,17 @@ db.open(function(p_db) {
       });
 
       udpServer.bind(config.udp_port, config.udp_address);
-
       console.log('UDP server running on UDP port ' + config.udp_port);
     }
   });
 
   console.log('Tracking server running at http://*:' + config.tracking_port + '/tracking_pixel.gif');
+  }
+
+   if (config.enable_dashboard) {
+     console.log('Dashboard server running at http://*:' + config.dashboard_port);
+     require('monitor');
+   }
 });
 
-if (config.enable_dashboard) {
-   console.log('Dashboard server running at http://*:' + config.dashboard_port);
-   require('monitor');
-}
+
