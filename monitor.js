@@ -6,6 +6,14 @@ var sys = require('sys'),
 
 var app = express.createServer();
 
+/* set defaults */
+if (config.hostnames === undefined) {
+  config.hostnammes = {
+			"dashboard": "localhost" + config.dashboard_port,
+			"tracker"  : "localhost" + config.tracker_port
+		      };
+}
+
 app.configure(function(){
   app.set('root', __dirname);
   app.set('db', db);
@@ -66,3 +74,5 @@ app.get('/login',function(req,res) {
 });
 
 app.listen(config.dashboard_port);
+
+exports.app = app;
