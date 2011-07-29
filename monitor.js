@@ -9,8 +9,8 @@ var app = express.createServer();
 /* set defaults */
 if (config.hostnames === undefined) {
   config.hostnammes = {
-			"dashboard": "localhost" + config.dashboard_port,
-			"tracker"  : "localhost" + config.tracker_port
+			"dashboard": "localhost:" + config.dashboard_port,
+			"tracker"  : "localhost:" + config.tracker_port
 		      };
 }
 

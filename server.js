@@ -63,6 +63,7 @@ db.open(function(p_db) {
       var socket = io.listen(app);
       socket.on('connection', function(client){
         // new client is here!
+	console.log("setting disconnect function ...");
         client.on('disconnect', function(){ console.log("Lost ws client"); });
       });
       hummingbird.socket = socket;

@@ -5,11 +5,11 @@
 <head>
 <script type="text/javascript">
 var siteconfig = {
-		   "track":  "//localhost:<%= config.tracker_http_port %>",
-		   "report": "//localhost:<%= config.dashboard_port %>",
-		   "ws": "//localhost:<%= config.dashboard_port %>",
+		   "track":  "<%= config.hostnames.tracker %>",
+		   "report": "<%= config.hostnames.dashboard %>",
+		   "ws": "<%= config.hostnames.dashboard %>",
                  };
-WEB_SOCKET_SWF_LOCATION = siteconfig.report + '/socket.io/WebSocketMain.swf';
+WEB_SOCKET_SWF_LOCATION = 'http://' +  siteconfig.report + '/socket.io/WebSocketMain.swf';
 </script>
 
 
@@ -145,6 +145,10 @@ WEB_SOCKET_SWF_LOCATION = siteconfig.report + '/socket.io/WebSocketMain.swf';
   </div>
 
 
+  <script src="/socket.io/socket.io.js"></script>
+  <!--
+  <script src="http://<%= config.hostnames.dashboard %>/socket.io/socket.io.js"></script>
+  -->
   <script src="js/jquery-1.5.1.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.8.13.custom.min.js"></script>
 
@@ -152,7 +156,6 @@ WEB_SOCKET_SWF_LOCATION = siteconfig.report + '/socket.io/WebSocketMain.swf';
   <script language="javascript" type="text/javascript" src="js/flot/jquery.flot.js"></script>
   <script language="javascript" type="text/javascript" src="js/aggregates.js"></script>
 
-  <script src="http://localhost:<%= config.dashboard_port %>/socket.io/socket.io.js"></script>
 
   <script src="js/helpers.js"></script>
 
